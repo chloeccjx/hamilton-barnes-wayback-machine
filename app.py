@@ -5,14 +5,148 @@ import unicodedata
 from pathlib import Path
 import streamlit as st
 
-# -------------------------------
+def render_interactive_tools_hub(current_tool: str) -> None:
+    tools = [
+        {
+            "name": "Candidate Market Insight",
+            "url": "https://www.hamilton-barnes.com/candidate-market-insight/",
+            "what_it_does": "Shows a broader view of candidate-side market trends, hiring movement and skill demand across selected technology areas.",
+            "who_its_for": "Useful for candidates planning their next move, as well as clients wanting a clearer sense of talent availability and market direction.",
+            "what_data_it_uses": "Uses market trend data, hiring context, and role-specific insight curated around Hamilton Barnes specialisms.",
+            "how_to_interpret": "Treat it as a directional market view that helps explain broader movement rather than a fixed prediction.",
+            "why_its_useful": "It helps users understand where demand is moving, where talent is tightening, and how the market is changing over time."
+        },
+        {
+            "name": "UK Salary Calculator",
+            "url": "https://hamilton-barnes-salary-calculator-uk.streamlit.app/",
+            "what_it_does": "Provides an estimated salary benchmark based on role, level, and location selections within the UK market.",
+            "who_its_for": "Useful for candidates reviewing their market value and for hiring teams wanting a clearer benchmark for UK salary positioning.",
+            "what_data_it_uses": "Uses Hamilton Barnes salary benchmarking inputs, market data, and role-specific compensation trends.",
+            "how_to_interpret": "Read the results as a directional benchmark rather than a guaranteed salary outcome, as final packages can vary by company, region, and skillset.",
+            "why_its_useful": "It helps users compare expectations more confidently and make more informed hiring or career decisions."
+        },
+        {
+            "name": "Germany Salary Calculator",
+            "url": "https://hamilton-barnes-salary-calculator-germany.streamlit.app/",
+            "what_it_does": "Provides an estimated salary benchmark based on role, level, and location selections within the German market.",
+            "who_its_for": "Useful for candidates exploring their market value in Germany and for hiring teams wanting clearer compensation guidance.",
+            "what_data_it_uses": "Uses Hamilton Barnes benchmarking inputs, salary trend data, and role-specific market information relevant to Germany.",
+            "how_to_interpret": "Use the figures as a directional guide rather than a final compensation guarantee, as actual offers vary by employer and hiring context.",
+            "why_its_useful": "It makes salary benchmarking easier to understand and gives users a more practical view of market positioning."
+        },
+        {
+            "name": "Wayback Machine",
+            "url": "https://hamilton-barnes-wayback-machine.streamlit.app/",
+            "what_it_does": "Shows how each specialism has evolved over time across market shifts, technical development, talent demand, and investment context.",
+            "who_its_for": "Useful for candidates, clients, and anyone wanting a structured year-by-year view of how technology niches have developed.",
+            "what_data_it_uses": "Uses curated market context, public source material, and specialism-specific content structured across the decade.",
+            "how_to_interpret": "Read it as a directional industry and market view designed to explain change over time rather than provide a fixed forecast.",
+            "why_its_useful": "It helps users understand the bigger picture behind each niche and where long-term change has taken place."
+        },
+    ]
+
+    visible_tools = [tool for tool in tools if tool["name"] != current_tool]
+
+    st.markdown(
+        """
+        <style>
+        .tools-hub-wrap {
+            margin-top: 3rem;
+        }
+
+        .tools-hub-title {
+            text-align: center;
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tools-hub-subtitle {
+            text-align: center;
+            font-size: 0.95rem;
+            max-width: 760px;
+            margin: 0 auto 1.8rem auto;
+            line-height: 1.6;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            padding: 1.2rem 1.2rem 1rem 1.2rem;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .tool-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-card-section {
+            margin-bottom: 0.55rem;
+            line-height: 1.55;
+            font-size: 0.93rem;
+        }
+
+        .tool-card-section strong {
+            font-weight: 700;
+        }
+
+        .tool-card-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.38rem 0.95rem;
+            border-radius: 999px;
+            border: 1px solid #b5c1cf;
+            background: transparent;
+            color: black !important;
+            text-decoration: none !important;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .tool-card-link:hover {
+            border-color: #7ac043;
+            color: #7ac043 !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown('<div class="tools-hub-wrap">', unsafe_allow_html=True)
+    st.markdown('<div class="tools-hub-title">Explore More Interactive Tools</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="tools-hub-subtitle">Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.</div>',
+        unsafe_allow_html=True,
+    )
+
+    for tool in visible_tools:
+        card_html = f"""
+        <div class="tool-card">
+            <div class="tool-card-title">{tool["name"]}</div>
+
+            <div class="tool-card-section"><strong>What the tool does:</strong> {tool["what_it_does"]}</div>
+            <div class="tool-card-section"><strong>Who it’s for:</strong> {tool["who_its_for"]}</div>
+            <div class="tool-card-section"><strong>What data it uses:</strong> {tool["what_data_it_uses"]}</div>
+            <div class="tool-card-section"><strong>How to interpret the results:</strong> {tool["how_to_interpret"]}</div>
+            <div class="tool-card-section"><strong>Why it’s useful:</strong> {tool["why_its_useful"]}</div>
+
+            <a class="tool-card-link" href="{tool["url"]}" target="_blank">Open tool</a>
+        </div>
+        """
+        st.markdown(card_html, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
 # Page config
-# -------------------------------
 st.set_page_config(page_title="Specialism Wayback Machine", layout="centered")
 
-# -------------------------------
 # Styling
-# -------------------------------
 st.markdown(
     """
 <style>
@@ -299,7 +433,6 @@ buttons = [
     ("Clients", "https://www.hamilton-barnes.com/clients"),
     ("Graduates", "https://www.empowering-future-network-engineers.com/")
 ]
-
 st.markdown(
     "<h3 style='text-align: center;'>Explore Hamilton Barnes 🌳</h3>",
     unsafe_allow_html=True
