@@ -94,45 +94,56 @@ def render_interactive_tools_hub(current_tool: str) -> None:
             line-height: 1.6;
         }}
 
+        .tools-grid {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }}
+
         .hb-tool-card {{
             background: rgba(255, 255, 255, 0.58);
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 22px;
             padding: 1.15rem 1.2rem 1rem 1.2rem;
-            margin-bottom: 1rem;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
         }}
 
         .hb-tool-card-title {{
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }}
 
         .hb-tool-card-line {{
-            font-size: 0.93rem;
-            line-height: 1.55;
-            margin-bottom: 0.45rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.35rem;
         }}
 
         .hb-tool-card-link {{
             display: inline-block;
-            margin-top: 0.7rem;
-            padding: 0.3rem 0.9rem;
+            margin-top: 0.6rem;
+            padding: 0.25rem 0.8rem;
             border-radius: 999px;
             border: 1px solid #b5c1cf;
             background: transparent;
             color: black;
             text-decoration: none;
-            font-size: 0.84rem;
+            font-size: 0.82rem;
             font-weight: 500;
         }}
 
         .hb-tool-card-link:hover {{
             border-color: #7ac043;
             color: #7ac043;
+        }}
+
+        @media (max-width: 768px) {{
+            .tools-grid {{
+                grid-template-columns: 1fr;
+            }}
         }}
     </style>
     </head>
@@ -142,14 +153,29 @@ def render_interactive_tools_hub(current_tool: str) -> None:
             <div class="tools-hub-subtitle">
                 Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.
             </div>
-            {cards_html}
+
+            <div class="tools-grid">
+                {cards_html}
+            </div>
         </div>
     </body>
     </html>
     """
 
-    # Adjust height if you add/remove tools
-    components.html(full_html, height=1200, scrolling=False)
+    components.html(full_html, height=1100, scrolling=False)
+    
+    for tool in visible_tools:
+        st.markdown('<div class="tool-box">', unsafe_allow_html=True)
+        st.markdown(f"#### {tool['name']}")
+        st.write(f"**What the tool does:** {tool['what_it_does']}")
+        st.write(f"**Who it’s for:** {tool['who_its_for']}")
+        st.write(f"**What data it uses:** {tool['what_data_it_uses']}")
+        st.write(f"**How to interpret the results:** {tool['how_to_interpret']}")
+        st.write(f"**Why it’s useful:** {tool['why_its_useful']}")
+        st.link_button("Open tool", tool["url"])
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Page config
 st.set_page_config(page_title="Specialism Wayback Machine", layout="centered")
