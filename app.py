@@ -4,6 +4,7 @@ import re
 import unicodedata
 from pathlib import Path
 import streamlit as st
+import streamlit.components.v1 as components
 
 def render_interactive_tools_hub(current_tool: str) -> None:
     tools = [
@@ -47,29 +48,53 @@ def render_interactive_tools_hub(current_tool: str) -> None:
 
     visible_tools = [tool for tool in tools if tool["name"] != current_tool]
 
-    st.markdown(
-        """
-        <style>
-        .tools-hub-wrap {
-            margin-top: 2.8rem;
-        }
+    cards_html = ""
+    for tool in visible_tools:
+        cards_html += f"""
+        <div class="hb-tool-card">
+            <div class="hb-tool-card-title">{tool["name"]}</div>
 
-        .tools-hub-title {
+            <div class="hb-tool-card-line"><strong>What the tool does:</strong> {tool["what_it_does"]}</div>
+            <div class="hb-tool-card-line"><strong>Who it’s for:</strong> {tool["who_its_for"]}</div>
+            <div class="hb-tool-card-line"><strong>What data it uses:</strong> {tool["what_data_it_uses"]}</div>
+            <div class="hb-tool-card-line"><strong>How to interpret the results:</strong> {tool["how_to_interpret"]}</div>
+            <div class="hb-tool-card-line"><strong>Why it’s useful:</strong> {tool["why_its_useful"]}</div>
+
+            <a class="hb-tool-card-link" href="{tool["url"]}" target="_blank">Open tool</a>
+        </div>
+        """
+
+    full_html = f"""
+    <html>
+    <head>
+    <style>
+        body {{
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #000000;
+            background: transparent;
+        }}
+
+        .tools-hub-wrap {{
+            margin-top: 0.5rem;
+        }}
+
+        .tools-hub-title {{
             text-align: center;
             font-size: 1.7rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-        }
+        }}
 
-        .tools-hub-subtitle {
+        .tools-hub-subtitle {{
             text-align: center;
             font-size: 0.95rem;
             max-width: 760px;
             margin: 0 auto 1.6rem auto;
             line-height: 1.6;
-        }
+        }}
 
-        .hb-tool-card {
+        .hb-tool-card {{
             background: rgba(255, 255, 255, 0.58);
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 22px;
@@ -78,53 +103,54 @@ def render_interactive_tools_hub(current_tool: str) -> None:
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
-        }
+        }}
 
-        .hb-tool-card-title {
+        .hb-tool-card-title {{
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 0.8rem;
-        }
+        }}
 
-        .hb-tool-card-line {
+        .hb-tool-card-line {{
             font-size: 0.93rem;
             line-height: 1.55;
             margin-bottom: 0.45rem;
-        }
+        }}
 
-        .hb-tool-card-line strong {
-            font-weight: 700;
-        }
-
-        .hb-tool-card-link {
+        .hb-tool-card-link {{
             display: inline-block;
             margin-top: 0.7rem;
             padding: 0.3rem 0.9rem;
             border-radius: 999px;
             border: 1px solid #b5c1cf;
             background: transparent;
-            color: black !important;
-            text-decoration: none !important;
+            color: black;
+            text-decoration: none;
             font-size: 0.84rem;
             font-weight: 500;
-        }
+        }}
 
-        .hb-tool-card-link:hover {
+        .hb-tool-card-link:hover {{
             border-color: #7ac043;
-            color: #7ac043 !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+            color: #7ac043;
+        }}
+    </style>
+    </head>
+    <body>
+        <div class="tools-hub-wrap">
+            <div class="tools-hub-title">Explore More Interactive Tools</div>
+            <div class="tools-hub-subtitle">
+                Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.
+            </div>
+            {cards_html}
+        </div>
+    </body>
+    </html>
+    """
 
-    st.markdown('<div class="tools-hub-wrap">', unsafe_allow_html=True)
-    st.markdown('<div class="tools-hub-title">Explore More Interactive Tools</div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div class="tools-hub-subtitle">Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.</div>',
-        unsafe_allow_html=True,
-    )
-
+    # Adjust height if you add/remove tools
+    components.html(full_html, height=1200, scrolling=False)
+    
     for tool in visible_tools:
         card_html = f"""
         <div class="hb-tool-card">
