@@ -8,43 +8,27 @@ import streamlit.components.v1 as components
 
 def render_interactive_tools_hub(current_tool: str) -> None:
     tools = [
-        {
-            "name": "Candidate Market Insight",
-            "url": "https://www.hamilton-barnes.com/candidate-market-insight",
-            "what_it_does": "Shows a broader view of candidate-side market trends, hiring movement, and skill demand across selected technology areas.",
-            "who_its_for": "Useful for candidates planning their next move, as well as clients wanting a clearer sense of talent availability and market direction.",
-            "what_data_it_uses": "Uses market trend data, hiring context, and role-specific insight curated around Hamilton Barnes specialisms.",
-            "how_to_interpret": "Treat it as a directional market view that helps explain broader movement rather than a fixed prediction.",
-            "why_its_useful": "It helps users understand where demand is moving, where talent is tightening, and how the market is changing over time."
-        },
-        {
-            "name": "UK Salary Calculator",
-            "url": "https://hamilton-barnes-salary-calculator-uk.streamlit.app/",
-            "what_it_does": "Provides an estimated salary benchmark based on role, level, and location selections within the UK market.",
-            "who_its_for": "Useful for candidates reviewing their market value and for hiring teams wanting a clearer benchmark for UK salary positioning.",
-            "what_data_it_uses": "Uses Hamilton Barnes salary benchmarking inputs, market data, and role-specific compensation trends.",
-            "how_to_interpret": "Read the results as a directional benchmark rather than a guaranteed salary outcome, as final packages can vary by company, region, and skillset.",
-            "why_its_useful": "It helps users compare expectations more confidently and make more informed hiring or career decisions."
-        },
-        {
-            "name": "Germany Salary Calculator",
-            "url": "https://hamilton-barnes-germany-salary-calculator.streamlit.app/",
-            "what_it_does": "Provides an estimated salary benchmark based on role, level, and location selections within the German market.",
-            "who_its_for": "Useful for candidates exploring their market value in Germany and for hiring teams wanting clearer compensation guidance.",
-            "what_data_it_uses": "Uses Hamilton Barnes benchmarking inputs, salary trend data, and role-specific market information relevant to Germany.",
-            "how_to_interpret": "Use the figures as a directional guide rather than a final compensation guarantee, as actual offers vary by employer and hiring context.",
-            "why_its_useful": "It makes salary benchmarking easier to understand and gives users a more practical view of market positioning."
-        },
-        {
-            "name": "Wayback Machine",
-            "url": "https://hamilton-barnes-wayback-machine.streamlit.app/",
-            "what_it_does": "Shows how each specialism has evolved over time across market shifts, technical development, talent demand, and investment context.",
-            "who_its_for": "Useful for candidates, clients, and anyone wanting a structured year-by-year view of how technology niches have developed.",
-            "what_data_it_uses": "Uses curated market context, public source material, and specialism-specific content structured across the decade.",
-            "how_to_interpret": "Read it as a directional industry and market view designed to explain change over time rather than provide a fixed forecast.",
-            "why_its_useful": "It helps users understand the bigger picture behind each niche and where long-term change has taken place."
-        },
-    ]
+    {
+        "name": "Candidate Market Insight",
+        "url": "https://www.hamilton-barnes.com/candidate-market-insight",
+        "summary": "Explore broader candidate-side market trends, hiring movement, and skill demand across selected technology areas to better understand where the market is shifting."
+    },
+    {
+        "name": "UK Salary Calculator",
+        "url": "https://hamilton-barnes-salary-calculator-uk.streamlit.app/",
+        "summary": "Benchmark salary expectations across the UK market using role, level, and location inputs designed to help candidates and hiring teams sense-check compensation more clearly."
+    },
+    {
+        "name": "Germany Salary Calculator",
+        "url": "https://hamilton-barnes-germany-salary-calculator.streamlit.app/",
+        "summary": "Benchmark salary expectations across the German market using role, level, and location inputs to give users a more practical view of market positioning."
+    },
+    {
+        "name": "Wayback Machine",
+        "url": "https://hamilton-barnes-wayback-machine.streamlit.app/",
+        "summary": "Explore how each specialism has evolved over time across market shifts, technical development, talent demand, and investment context through a structured year-by-year view."
+    },
+]
 
     visible_tools = [tool for tool in tools if tool["name"] != current_tool]
 
@@ -53,13 +37,7 @@ def render_interactive_tools_hub(current_tool: str) -> None:
         cards_html += f"""
         <div class="hb-tool-card">
             <div class="hb-tool-card-title">{tool["name"]}</div>
-
-            <div class="hb-tool-card-line"><strong>What the tool does:</strong> {tool["what_it_does"]}</div>
-            <div class="hb-tool-card-line"><strong>Who it’s for:</strong> {tool["who_its_for"]}</div>
-            <div class="hb-tool-card-line"><strong>What data it uses:</strong> {tool["what_data_it_uses"]}</div>
-            <div class="hb-tool-card-line"><strong>How to interpret the results:</strong> {tool["how_to_interpret"]}</div>
-            <div class="hb-tool-card-line"><strong>Why it’s useful:</strong> {tool["why_its_useful"]}</div>
-
+            <div class="hb-tool-card-line">{tool["summary"]}</div>
             <a class="hb-tool-card-link" href="{tool["url"]}" target="_blank">Open tool</a>
         </div>
         """
