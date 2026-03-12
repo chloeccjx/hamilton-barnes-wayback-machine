@@ -9,8 +9,8 @@ def render_interactive_tools_hub(current_tool: str) -> None:
     tools = [
         {
             "name": "Candidate Market Insight",
-            "url": "https://www.hamilton-barnes.com/candidate-market-insight/",
-            "what_it_does": "Shows a broader view of candidate-side market trends, hiring movement and skill demand across selected technology areas.",
+            "url": "https://www.hamilton-barnes.com/candidate-market-insight",
+            "what_it_does": "Shows a broader view of candidate-side market trends, hiring movement, and skill demand across selected technology areas.",
             "who_its_for": "Useful for candidates planning their next move, as well as clients wanting a clearer sense of talent availability and market direction.",
             "what_data_it_uses": "Uses market trend data, hiring context, and role-specific insight curated around Hamilton Barnes specialisms.",
             "how_to_interpret": "Treat it as a directional market view that helps explain broader movement rather than a fixed prediction.",
@@ -27,7 +27,7 @@ def render_interactive_tools_hub(current_tool: str) -> None:
         },
         {
             "name": "Germany Salary Calculator",
-            "url": "https://hamilton-barnes-salary-calculator-germany.streamlit.app/",
+            "url": "https://hamilton-barnes-germany-salary-calculator.streamlit.app/",
             "what_it_does": "Provides an estimated salary benchmark based on role, level, and location selections within the German market.",
             "who_its_for": "Useful for candidates exploring their market value in Germany and for hiring teams wanting clearer compensation guidance.",
             "what_data_it_uses": "Uses Hamilton Barnes benchmarking inputs, salary trend data, and role-specific market information relevant to Germany.",
@@ -92,10 +92,6 @@ def render_interactive_tools_hub(current_tool: str) -> None:
             font-size: 0.93rem;
         }
 
-        .tool-card-section strong {
-            font-weight: 700;
-        }
-
         .tool-card-link {
             display: inline-block;
             margin-top: 0.8rem;
@@ -119,51 +115,45 @@ def render_interactive_tools_hub(current_tool: str) -> None:
     )
 
     st.markdown('<div class="tools-hub-wrap">', unsafe_allow_html=True)
-    st.markdown('<div class="tools-hub-title">Explore More Interactive Tools</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="tools-hub-title">Explore More Interactive Tools</div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(
         '<div class="tools-hub-subtitle">Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.</div>',
         unsafe_allow_html=True,
     )
 
-for tool in visible_tools:
-    card_html = f"""
-    <div class="tool-card">
+    for tool in visible_tools:
+        card_html = f"""
+        <div class="tool-card">
+            <div class="tool-card-title">{tool["name"]}</div>
 
-        <div class="tool-card-title">{tool["name"]}</div>
+            <div class="tool-card-section">
+                <strong>What the tool does:</strong> {tool["what_it_does"]}
+            </div>
 
-        <div class="tool-card-section">
-            <strong>What the tool does:</strong>
-            {tool["what_it_does"]}
+            <div class="tool-card-section">
+                <strong>Who it’s for:</strong> {tool["who_its_for"]}
+            </div>
+
+            <div class="tool-card-section">
+                <strong>What data it uses:</strong> {tool["what_data_it_uses"]}
+            </div>
+
+            <div class="tool-card-section">
+                <strong>How to interpret the results:</strong> {tool["how_to_interpret"]}
+            </div>
+
+            <div class="tool-card-section">
+                <strong>Why it’s useful:</strong> {tool["why_its_useful"]}
+            </div>
+
+            <a class="tool-card-link" href="{tool["url"]}" target="_blank">Open tool</a>
         </div>
-
-        <div class="tool-card-section">
-            <strong>Who it’s for:</strong>
-            {tool["who_its_for"]}
-        </div>
-
-        <div class="tool-card-section">
-            <strong>What data it uses:</strong>
-            {tool["what_data_it_uses"]}
-        </div>
-
-        <div class="tool-card-section">
-            <strong>How to interpret the results:</strong>
-            {tool["how_to_interpret"]}
-        </div>
-
-        <div class="tool-card-section">
-            <strong>Why it’s useful:</strong>
-            {tool["why_its_useful"]}
-        </div>
-
-        <a class="tool-card-link" href="{tool["url"]}" target="_blank">
-            Open tool
-        </a>
-
-    </div>
-    """
-
-    st.markdown(card_html, unsafe_allow_html=True)
+        """
+        st.markdown(card_html, unsafe_allow_html=True)
+        
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Page config
