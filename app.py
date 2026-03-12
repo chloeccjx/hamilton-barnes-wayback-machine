@@ -100,7 +100,7 @@ def render_interactive_tools_hub(current_tool: str) -> None:
         st.write(f"**Why it’s useful:** {tool['why_its_useful']}")
         st.link_button("Open tool", tool["url"])
         st.markdown("</div>", unsafe_allow_html=True)
-        
+
     st.markdown(
         '<div class="tools-hub-title">Explore More Interactive Tools</div>',
         unsafe_allow_html=True,
@@ -109,36 +109,6 @@ def render_interactive_tools_hub(current_tool: str) -> None:
         '<div class="tools-hub-subtitle">Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.</div>',
         unsafe_allow_html=True,
     )
-
-    for tool in visible_tools:
-        card_html = f"""
-        <div class="tool-card">
-            <div class="tool-card-title">{tool["name"]}</div>
-
-            <div class="tool-card-section">
-                <strong>What the tool does:</strong> {tool["what_it_does"]}
-            </div>
-
-            <div class="tool-card-section">
-                <strong>Who it’s for:</strong> {tool["who_its_for"]}
-            </div>
-
-            <div class="tool-card-section">
-                <strong>What data it uses:</strong> {tool["what_data_it_uses"]}
-            </div>
-
-            <div class="tool-card-section">
-                <strong>How to interpret the results:</strong> {tool["how_to_interpret"]}
-            </div>
-
-            <div class="tool-card-section">
-                <strong>Why it’s useful:</strong> {tool["why_its_useful"]}
-            </div>
-
-            <a class="tool-card-link" href="{tool["url"]}" target="_blank">Open tool</a>
-        </div>
-        """
-        st.markdown(card_html, unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
 
