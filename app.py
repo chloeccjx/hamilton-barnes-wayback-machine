@@ -126,35 +126,34 @@ def render_interactive_tools_hub(current_tool: str) -> None:
     )
 
 for tool in visible_tools:
-    
     card_html = f"""
     <div class="tool-card">
 
         <div class="tool-card-title">{tool["name"]}</div>
 
         <div class="tool-card-section">
-        <strong>What the tool does:</strong>
-        {tool["what_it_does"]}
+            <strong>What the tool does:</strong>
+            {tool["what_it_does"]}
         </div>
 
         <div class="tool-card-section">
-        <strong>Who it’s for:</strong>
-        {tool["who_its_for"]}
+            <strong>Who it’s for:</strong>
+            {tool["who_its_for"]}
         </div>
 
         <div class="tool-card-section">
-        <strong>What data it uses:</strong>
-        {tool["what_data_it_uses"]}
+            <strong>What data it uses:</strong>
+            {tool["what_data_it_uses"]}
         </div>
 
         <div class="tool-card-section">
-        <strong>How to interpret the results:</strong>
-        {tool["how_to_interpret"]}
+            <strong>How to interpret the results:</strong>
+            {tool["how_to_interpret"]}
         </div>
 
         <div class="tool-card-section">
-        <strong>Why it’s useful:</strong>
-        {tool["why_its_useful"]}
+            <strong>Why it’s useful:</strong>
+            {tool["why_its_useful"]}
         </div>
 
         <a class="tool-card-link" href="{tool["url"]}" target="_blank">
@@ -165,7 +164,6 @@ for tool in visible_tools:
     """
 
     st.markdown(card_html, unsafe_allow_html=True)
-
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Page config
