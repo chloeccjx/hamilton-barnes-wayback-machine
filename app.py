@@ -50,114 +50,96 @@ def render_interactive_tools_hub(current_tool: str) -> None:
     st.markdown(
         """
         <style>
+        .tools-hub-wrap {
+            margin-top: 2.8rem;
+        }
+
         .tools-hub-title {
             text-align: center;
-            font-size: 1.65rem;
+            font-size: 1.7rem;
             font-weight: 700;
-            margin-top: 2.5rem;
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.5rem;
         }
 
         .tools-hub-subtitle {
             text-align: center;
             font-size: 0.95rem;
             max-width: 760px;
-            margin: 0 auto 1.5rem auto;
+            margin: 0 auto 1.6rem auto;
             line-height: 1.6;
         }
 
-        .tool-box {
-            background: rgba(255, 255, 255, 0.55);
+        .hb-tool-card {
+            background: rgba(255, 255, 255, 0.58);
             border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 18px;
-            padding: 1rem 1.1rem 0.9rem 1.1rem;
+            border-radius: 22px;
+            padding: 1.15rem 1.2rem 1rem 1.2rem;
             margin-bottom: 1rem;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
+        }
+
+        .hb-tool-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .hb-tool-card-line {
+            font-size: 0.93rem;
+            line-height: 1.55;
+            margin-bottom: 0.45rem;
+        }
+
+        .hb-tool-card-line strong {
+            font-weight: 700;
+        }
+
+        .hb-tool-card-link {
+            display: inline-block;
+            margin-top: 0.7rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid #b5c1cf;
+            background: transparent;
+            color: black !important;
+            text-decoration: none !important;
+            font-size: 0.84rem;
+            font-weight: 500;
+        }
+
+        .hb-tool-card-link:hover {
+            border-color: #7ac043;
+            color: #7ac043 !important;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    st.markdown(
-        '<div class="tools-hub-title">Explore More Interactive Tools</div>',
-        unsafe_allow_html=True,
-    )
+    st.markdown('<div class="tools-hub-wrap">', unsafe_allow_html=True)
+    st.markdown('<div class="tools-hub-title">Explore More Interactive Tools</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="tools-hub-subtitle">Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.</div>',
         unsafe_allow_html=True,
     )
 
     for tool in visible_tools:
-        st.markdown('<div class="tool-box">', unsafe_allow_html=True)
-        st.markdown(f"#### {tool['name']}")
-        st.write(f"**What the tool does:** {tool['what_it_does']}")
-        st.write(f"**Who it’s for:** {tool['who_its_for']}")
-        st.write(f"**What data it uses:** {tool['what_data_it_uses']}")
-        st.write(f"**How to interpret the results:** {tool['how_to_interpret']}")
-        st.write(f"**Why it’s useful:** {tool['why_its_useful']}")
-        st.link_button("Open tool", tool["url"])
-        st.markdown("</div>", unsafe_allow_html=True)
+        card_html = f"""
+        <div class="hb-tool-card">
+            <div class="hb-tool-card-title">{tool["name"]}</div>
 
-    st.markdown("</div>", unsafe_allow_html=True)
+            <div class="hb-tool-card-line"><strong>What the tool does:</strong> {tool["what_it_does"]}</div>
+            <div class="hb-tool-card-line"><strong>Who it’s for:</strong> {tool["who_its_for"]}</div>
+            <div class="hb-tool-card-line"><strong>What data it uses:</strong> {tool["what_data_it_uses"]}</div>
+            <div class="hb-tool-card-line"><strong>How to interpret the results:</strong> {tool["how_to_interpret"]}</div>
+            <div class="hb-tool-card-line"><strong>Why it’s useful:</strong> {tool["why_its_useful"]}</div>
 
-# Page config
-st.set_page_config(page_title="Specialism Wayback Machine", layout="centered")
-
-# Styling
-st.markdown(
-    """
-<style>
-/* Hide sidebar + transparent header */
-[data-testid="stSidebar"] { display: none !important; }
-[data-testid="stHeader"] { background: transparent !important; }
-
-/* Centered content container */
-.main .block-container {
-    max-width: 900px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-top: 4.5rem !important;
-    padding-bottom: 5rem !important;
-}
-
-/* Black text */
-h1, h2, h3, h4, h5, h6, p, div, span, li {
-    color: #000000 !important;
-}
-
-/* Tighten spacing */
-h2, h3 {
-    margin-top: 1.4rem !important;
-}
-
-/* Glass card box */
-.glass-card {
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 18px;
-    padding: 1.3rem 1.5rem;
-    margin-top: 0.6rem;
-    margin-bottom: 1.6rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-}
-
-.glass-card p {
-    margin: 0 0 0.9rem 0;
-    line-height: 1.6;
-}
-
-.glass-card p:last-child {
-    margin-bottom: 0;
-}
-</style>
-""",
-    unsafe_allow_html=True,
-)
+            <a class="hb-tool-card-link" href="{tool["url"]}" target="_blank">Open tool</a>
+        </div>
+        """
+        st.markdown(card_html, unsafe_allow_html=True)
 
 # -------------------------------
 # Background
