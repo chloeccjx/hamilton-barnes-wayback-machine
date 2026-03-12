@@ -459,3 +459,5 @@ for label, url in buttons:
         """,
         unsafe_allow_html=True,
     )
+
+render_interactive_tools_hub(current_tool="Wayback Machine")
