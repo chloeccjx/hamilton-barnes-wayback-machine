@@ -125,8 +125,8 @@ def render_interactive_tools_hub(current_tool: str) -> None:
         unsafe_allow_html=True,
     )
 
-    for tool in visible_tools:
-
+for tool in visible_tools:
+    
     card_html = f"""
     <div class="tool-card">
 
