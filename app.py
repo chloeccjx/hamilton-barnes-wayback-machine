@@ -150,22 +150,6 @@ def render_interactive_tools_hub(current_tool: str) -> None:
 
     # Adjust height if you add/remove tools
     components.html(full_html, height=1200, scrolling=False)
-    
-    for tool in visible_tools:
-        card_html = f"""
-        <div class="hb-tool-card">
-            <div class="hb-tool-card-title">{tool["name"]}</div>
-
-            <div class="hb-tool-card-line"><strong>What the tool does:</strong> {tool["what_it_does"]}</div>
-            <div class="hb-tool-card-line"><strong>Who it’s for:</strong> {tool["who_its_for"]}</div>
-            <div class="hb-tool-card-line"><strong>What data it uses:</strong> {tool["what_data_it_uses"]}</div>
-            <div class="hb-tool-card-line"><strong>How to interpret the results:</strong> {tool["how_to_interpret"]}</div>
-            <div class="hb-tool-card-line"><strong>Why it’s useful:</strong> {tool["why_its_useful"]}</div>
-
-            <a class="hb-tool-card-link" href="{tool["url"]}" target="_blank">Open tool</a>
-        </div>
-        """
-        st.markdown(card_html, unsafe_allow_html=True)
 
 # Page config
 st.set_page_config(page_title="Specialism Wayback Machine", layout="centered")
