@@ -163,19 +163,6 @@ def render_interactive_tools_hub(current_tool: str) -> None:
     """
 
     components.html(full_html, height=1100, scrolling=False)
-    
-    for tool in visible_tools:
-        st.markdown('<div class="tool-box">', unsafe_allow_html=True)
-        st.markdown(f"#### {tool['name']}")
-        st.write(f"**What the tool does:** {tool['what_it_does']}")
-        st.write(f"**Who it’s for:** {tool['who_its_for']}")
-        st.write(f"**What data it uses:** {tool['what_data_it_uses']}")
-        st.write(f"**How to interpret the results:** {tool['how_to_interpret']}")
-        st.write(f"**Why it’s useful:** {tool['why_its_useful']}")
-        st.link_button("Open tool", tool["url"])
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
 # Page config
 st.set_page_config(page_title="Specialism Wayback Machine", layout="centered")
