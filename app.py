@@ -50,71 +50,57 @@ def render_interactive_tools_hub(current_tool: str) -> None:
     st.markdown(
         """
         <style>
-        .tools-hub-wrap {
-            margin-top: 3rem;
-        }
-
         .tools-hub-title {
             text-align: center;
             font-size: 1.65rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 0.45rem;
         }
 
         .tools-hub-subtitle {
             text-align: center;
             font-size: 0.95rem;
             max-width: 760px;
-            margin: 0 auto 1.8rem auto;
+            margin: 0 auto 1.5rem auto;
             line-height: 1.6;
         }
 
-        .tool-card {
-            background: rgba(255, 255, 255, 0.58);
+        .tool-box {
+            background: rgba(255, 255, 255, 0.55);
             border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 20px;
-            padding: 1.2rem 1.2rem 1rem 1.2rem;
+            border-radius: 18px;
+            padding: 1rem 1.1rem 0.9rem 1.1rem;
             margin-bottom: 1rem;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-        }
-
-        .tool-card-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .tool-card-section {
-            margin-bottom: 0.55rem;
-            line-height: 1.55;
-            font-size: 0.93rem;
-        }
-
-        .tool-card-link {
-            display: inline-block;
-            margin-top: 0.8rem;
-            padding: 0.38rem 0.95rem;
-            border-radius: 999px;
-            border: 1px solid #b5c1cf;
-            background: transparent;
-            color: black !important;
-            text-decoration: none !important;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .tool-card-link:hover {
-            border-color: #7ac043;
-            color: #7ac043 !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    st.markdown('<div class="tools-hub-wrap">', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="tools-hub-title">Explore More Interactive Tools</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<div class="tools-hub-subtitle">Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.</div>',
+        unsafe_allow_html=True,
+    )
+
+    for tool in visible_tools:
+        st.markdown('<div class="tool-box">', unsafe_allow_html=True)
+        st.markdown(f"#### {tool['name']}")
+        st.write(f"**What the tool does:** {tool['what_it_does']}")
+        st.write(f"**Who it’s for:** {tool['who_its_for']}")
+        st.write(f"**What data it uses:** {tool['what_data_it_uses']}")
+        st.write(f"**How to interpret the results:** {tool['how_to_interpret']}")
+        st.write(f"**Why it’s useful:** {tool['why_its_useful']}")
+        st.link_button("Open tool", tool["url"])
+        st.markdown("</div>", unsafe_allow_html=True)
+        
     st.markdown(
         '<div class="tools-hub-title">Explore More Interactive Tools</div>',
         unsafe_allow_html=True,
@@ -153,7 +139,7 @@ def render_interactive_tools_hub(current_tool: str) -> None:
         </div>
         """
         st.markdown(card_html, unsafe_allow_html=True)
-        
+
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Page config
