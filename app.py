@@ -141,6 +141,62 @@ def render_interactive_tools_hub(current_tool: str) -> None:
         """
         st.markdown(card_html, unsafe_allow_html=True)
 
+# Page config
+st.set_page_config(page_title="Specialism Wayback Machine", layout="centered")
+
+# Styling
+st.markdown(
+    """
+<style>
+/* Hide sidebar + transparent header */
+[data-testid="stSidebar"] { display: none !important; }
+[data-testid="stHeader"] { background: transparent !important; }
+
+/* Centered content container */
+.main .block-container {
+    max-width: 900px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-top: 4.5rem !important;
+    padding-bottom: 5rem !important;
+}
+
+/* Black text */
+h1, h2, h3, h4, h5, h6, p, div, span, li {
+    color: #000000 !important;
+}
+
+/* Tighten spacing */
+h2, h3 {
+    margin-top: 1.4rem !important;
+}
+
+/* Glass card box */
+.glass-card {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    padding: 1.3rem 1.5rem;
+    margin-top: 0.6rem;
+    margin-bottom: 1.6rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.glass-card p {
+    margin: 0 0 0.9rem 0;
+    line-height: 1.6;
+}
+
+.glass-card p:last-child {
+    margin-bottom: 0;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
 # -------------------------------
 # Background
 # -------------------------------
