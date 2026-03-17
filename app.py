@@ -128,7 +128,7 @@ def render_interactive_tools_hub(current_tool: str) -> None:
     <body>
         <div class="tools-hub-wrap">
             <div class="tools-hub-subtitle">
-                Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts, while making it easier to move between related tools.
+                Explore the rest of the Hamilton Barnes interactive toolset below. Each one is designed to help users better understand salary benchmarks, market positioning, or long-term specialism shifts.
             </div>
 
             <div class="tools-grid">
