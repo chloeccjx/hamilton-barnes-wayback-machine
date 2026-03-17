@@ -68,7 +68,7 @@ def render_interactive_tools_hub(current_tool: str) -> None:
             text-align: center;
             font-size: 0.95rem;
             max-width: 760px;
-            margin: 0 auto 1.6rem auto;
+            margin: 1.8rem auto 1.6rem auto;
             line-height: 1.6;
         }}
 
