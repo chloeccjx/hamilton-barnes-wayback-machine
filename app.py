@@ -5,6 +5,7 @@ import unicodedata
 from pathlib import Path
 import streamlit as st
 import streamlit.components.v1 as components
+from urllib.parse import quote
 
 def render_interactive_tools_hub(current_tool: str) -> None:
     tools = [
