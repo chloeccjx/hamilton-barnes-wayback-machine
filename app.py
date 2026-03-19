@@ -355,7 +355,15 @@ st.divider()
 # -------------------------------
 # Controls (Dropdown + Slider)
 # -------------------------------
-niche = st.selectbox("Choose a Specialism", niches)
+
+# Read specialism from URL if present
+query_specialism = st.query_params.get("specialism", None)
+
+default_index = 0
+if query_specialism in niches:
+    default_index = niches.index(query_specialism)
+
+niche = st.selectbox("Choose a Specialism", niches, index=default_index)
 
 years = available_years_for(niche)
 numeric_years = sorted([int(y) for y in years if y.isdigit()])
@@ -363,15 +371,31 @@ numeric_years = sorted([int(y) for y in years if y.isdigit()])
 if not numeric_years:
     numeric_years = list(range(2016, 2027))
 
+# Read year from URL if present
+query_year = st.query_params.get("year", None)
+
+default_year = min(numeric_years)
+if query_year:
+    try:
+        query_year_int = int(query_year)
+        if query_year_int in numeric_years:
+            default_year = query_year_int
+    except ValueError:
+        pass
+
 year = st.slider(
     "Range Slider",
     min_value=min(numeric_years),
     max_value=max(numeric_years),
-    value=min(numeric_years),
+    value=default_year,
     step=1
 )
 
 year = str(year)
+
+# Keep URL updated
+st.query_params["specialism"] = niche
+st.query_params["year"] = year
 
 st.markdown(f"## {niche}: {year}")
 
